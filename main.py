@@ -18,8 +18,8 @@ app.add_middleware(
 # Database connection setup
 db = mysql.connector.connect(
     host="localhost",
-    user="root",
-    password="Sushmi2005@",
+    user="user_name",
+    password="password",
     database="library_management"
 )
 
