@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif;  background-color: #97bee5; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin: 0 10px; cursor: pointer; color: rgb(255, 0, 0); text-decoration: underline; }
+        .section { display: none; }
+        .form { margin: 20px 0; }
+        .table { margin-top: 20px; }
+        h3{color: #ff0090;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Library Management System</h1>
+        <div class="nav">
+            <a onclick="showSection('home')">Home</a>
+            <a onclick="showSection('authors')">Authors</a>
+            <a onclick="showSection('books')">Books</a>
+            <a onclick="showSection('borrowers')">Borrowers</a>
+            <a onclick="showSection('transactions')">Transactions</a>
+        </div>
+
+        <!-- Home Section -->
+        <div id="home" class="section" style="display: block;">
+            <h2>Welcome to the Library Management System</h2>
+            <p>Our Library Management System helps you efficiently manage authors, books, borrowers, and borrowing transactions all in one place. With a simple and intuitive interface, you can easily track and maintain records with just a few clicks.</p>
+            
+            <h3>Features</h3>
+            <ul>
+                <li>Manage Authors: Add, edit, view, and delete author information.</li>
+                <li>Manage Books: Keep track of books, including title, author, year, and genre.</li>
+                <li>Manage Borrowers: Maintain borrower details like name, email, and phone.</li>
+                <li>Manage Transactions: Record borrowing transactions and track book returns.</li>
+            </ul>
+        
+            <h3>Get Started</h3>
+            <p>Use the navigation menu at the top to access and manage different sections. Enjoy a seamless experience managing your library's resources.</p>
+        
+        </div>
+
+        <!-- Authors Section -->
+        <div id="authors" class="section">
+            <h2>Manage Authors</h2>
+            <!-- Author CRUD Forms -->
+            <div class="form">
+                <h3>Add Author</h3>
+                <input type="text" id="author-name" placeholder="Name">
+                <input type="text" id="author-bio" placeholder="Bio">
+                <button onclick="insertAuthor()">Add Author</button>
+            </div>
+            <div class="form">
+                <h3>Update Author</h3>
+                <input type="number" id="update-author-id" placeholder="ID">
+                <input type="text" id="update-author-name" placeholder="Name">
+                <input type="text" id="update-author-bio" placeholder="Bio">
+                <button onclick="updateAuthor()">Update Author</button>
+            </div>
+            <div class="form">
+                <h3>Delete Author</h3>
+                <input type="number" id="delete-author-id" placeholder="ID">
+                <button onclick="deleteAuthor()">Delete Author</button>
+            </div>
+            <button onclick="selectAuthors()">Show All Authors</button>
+            <div id="authors-result" class="table"></div>
+        </div>
+
+        <!-- Books Section -->
+        <div id="books" class="section">
+            <h2>Manage Books</h2>
+            <!-- Book CRUD Forms -->
+            <div class="form">
+                <h3>Add Book</h3>
+                <input type="text" id="book-title" placeholder="Title">
+                <input type="number" id="book-author-id" placeholder="Author ID">
+                <input type="number" id="book-year" placeholder="Published Year">
+                <input type="text" id="book-genre" placeholder="Genre">
+                <button onclick="insertBook()">Add Book</button>
+            </div>
+            <div class="form">
+                <h3>Update Book</h3>
+                <input type="number" id="update-book-id" placeholder="ID">
+                <input type="text" id="update-book-title" placeholder="Title">
+                <input type="number" id="update-book-author-id" placeholder="Author ID">
+                <input type="number" id="update-book-year" placeholder="Published Year">
+                <input type="text" id="update-book-genre" placeholder="Genre">
+                <button onclick="updateBook()">Update Book</button>
+            </div>
+            <div class="form">
+                <h3>Delete Book</h3>
+                <input type="number" id="delete-book-id" placeholder="ID">
+                <button onclick="deleteBook()">Delete Book</button>
+            </div>
+            <button onclick="selectBooks()">Show All Books</button>
+            <div id="books-result" class="table"></div>
+        </div>
+
+        <!-- Borrowers Section -->
+        <div id="borrowers" class="section">
+            <h2>Manage Borrowers</h2>
+            <!-- Borrower CRUD Forms -->
+            <div class="form">
+                <h3>Add Borrower</h3>
+                <input type="text" id="borrower-name" placeholder="Name">
+                <input type="email" id="borrower-email" placeholder="Email">
+                <input type="text" id="borrower-phone" placeholder="Phone">
+                <button onclick="insertBorrower()">Add Borrower</button>
+            </div>
+            <div class="form">
+                <h3>Update Borrower</h3>
+                <input type="number" id="update-borrower-id" placeholder="ID">
+                <input type="text" id="update-borrower-name" placeholder="Name">
+                <input type="email" id="update-borrower-email" placeholder="Email">
+                <input type="text" id="update-borrower-phone" placeholder="Phone">
+                <button onclick="updateBorrower()">Update Borrower</button>
+            </div>
+            <div class="form">
+                <h3>Delete Borrower</h3>
+                <input type="number" id="delete-borrower-id" placeholder="ID">
+                <button onclick="deleteBorrower()">Delete Borrower</button>
+            </div>
+            <button onclick="selectBorrowers()">Show All Borrowers</button>
+            <div id="borrowers-result" class="table"></div>
+        </div>
+
+        <!-- Transactions Section -->
+        <div id="transactions" class="section">
+            <h2>Manage Transactions</h2>
+            <!-- Transaction CRUD Forms -->
+            <div class="form">
+                <h3>Add Transaction</h3>
+                <input type="number" id="transaction-book-id" placeholder="Book ID">
+                <input type="number" id="transaction-borrower-id" placeholder="Borrower ID">
+                <input type="date" id="transaction-borrow-date" placeholder="Borrow Date">
+                <input type="date" id="transaction-return-date" placeholder="Return Date">
+                <button onclick="insertTransaction()">Add Transaction</button>
+            </div>
+            <div class="form">
+                <h3>Update Transaction</h3>
+                <input type="number" id="update-transaction-id" placeholder="ID">
+                <input type="number" id="update-transaction-book-id" placeholder="Book ID">
+                <input type="number" id="update-transaction-borrower-id" placeholder="Borrower ID">
+                <input type="date" id="update-transaction-borrow-date" placeholder="Borrow Date">
+                <input type="date" id="update-transaction-return-date" placeholder="Return Date">
+                <button onclick="updateTransaction()">Update Transaction</button>
+            </div>
+            <div class="form">
+                <h3>Delete Transaction</h3>
+                <input type="number" id="delete-transaction-id" placeholder="ID">
+                <button onclick="deleteTransaction()">Delete Transaction</button>
+            </div>
+            <button onclick="selectTransactions()">Show All Transactions</button>
+            <div id="transactions-result" class="table"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(div => div.style.display = 'none');
+            document.getElementById(section).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
